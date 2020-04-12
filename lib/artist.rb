@@ -1,17 +1,12 @@
 class Artist
-  attr_accessor :name
+  attr_accessor :name, :songs
 
   @@all = []
 
   def initialize(name)
     @name = name
     @@all << self
-  end
-
-  def songs
-      Song.all.select do |song|
-        song.artist == self
-      end
+    @songs = []
   end
 
   def new_song(name, genre)
@@ -19,9 +14,7 @@ class Artist
   end
 
   def genres
-    songs.map do |song|
-      song.genre
-    end
+    songs.map {|song| song.genre}.uniq
   end
 
 
